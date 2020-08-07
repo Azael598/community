@@ -1,7 +1,7 @@
-package life.majiang.community.interceptor;
+package life.john.community.interceptor;
 
-import life.majiang.community.mapper.UserMapper;
-import life.majiang.community.model.User;
+import life.john.community.mapper.UserMapper;
+import life.john.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;

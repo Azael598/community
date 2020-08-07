@@ -1,12 +1,11 @@
-package life.majiang.community.service;
+package life.john.community.service;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QDecoderStream;
-import life.majiang.community.dto.PaginationDTO;
-import life.majiang.community.dto.QuestionDTO;
-import life.majiang.community.mapper.QuestionMapper;
-import life.majiang.community.mapper.UserMapper;
-import life.majiang.community.model.Question;
-import life.majiang.community.model.User;
+import life.john.community.dto.QuestionDTO;
+import life.john.community.mapper.UserMapper;
+import life.john.community.model.User;
+import life.john.community.dto.PaginationDTO;
+import life.john.community.mapper.QuestionMapper;
+import life.john.community.model.Question;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,5 +94,16 @@ public class QuestionService {
        User user = userMapper.findById(question.getCreator());
        questionDTO.setUser(user);
        return questionDTO;
+    }
+
+    public void createOrUpdate(Question question) {
+        if (question.getId()==null){
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.create(question);
+        }else {
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.update(question);
+        }
     }
 }

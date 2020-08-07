@@ -1,13 +1,10 @@
-package life.majiang.community.provider;
+package life.john.community.provider;
 
 import com.alibaba.fastjson.JSON;
-import life.majiang.community.dto.AccessTokenDTO;
-import life.majiang.community.dto.GithubUser;
+import life.john.community.dto.AccessTokenDTO;
+import life.john.community.dto.GithubUser;
 import okhttp3.*;
-import okhttp3.Request.Builder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 

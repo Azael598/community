@@ -1,4 +1,4 @@
-package life.majiang.community.interceptor;
+package life.john.community.interceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

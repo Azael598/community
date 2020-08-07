@@ -1,9 +1,7 @@
-package life.majiang.community.controller;
+package life.john.community.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import life.majiang.community.dto.QuestionDTO;
-import life.majiang.community.mapper.QuestionMapper;
-import life.majiang.community.service.QuestionService;
+import life.john.community.dto.QuestionDTO;
+import life.john.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
