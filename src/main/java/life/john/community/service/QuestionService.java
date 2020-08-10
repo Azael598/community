@@ -1,5 +1,7 @@
 package life.john.community.service;
 
+import life.john.community.Exception.CustomizeErrorCode;
+import life.john.community.Exception.CustomizeException;
 import life.john.community.dto.QuestionDTO;
 import life.john.community.mapper.UserMapper;
 import life.john.community.model.QuestionExample;
@@ -95,6 +97,9 @@ public class QuestionService {
 
     public QuestionDTO getById(Integer id) {
        Question question = questionMapper.selectByPrimaryKey(id);
+       if (question == null){
+           throw new CustomizeException(CustomizeErrorCode.Question_Not_Found);
+       }
        QuestionDTO questionDTO = new QuestionDTO();
        BeanUtils.copyProperties(question,questionDTO);
        User user = userMapper.selectByPrimaryKey(question.getCreator());
@@ -116,7 +121,10 @@ public class QuestionService {
             updateQuestion.setTag(question.getTag());
             QuestionExample example = new QuestionExample();
             example.createCriteria().andIdEqualTo(question.getId());
-            questionMapper.updateByExampleSelective(updateQuestion,example);
+            int updated = questionMapper.updateByExampleSelective(updateQuestion,example);
+            if (updated != 1){
+                throw new CustomizeException(CustomizeErrorCode.Question_Not_Found);
+            }
         }
     }
 }
