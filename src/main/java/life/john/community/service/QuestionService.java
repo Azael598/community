@@ -3,6 +3,7 @@ package life.john.community.service;
 import life.john.community.Exception.CustomizeErrorCode;
 import life.john.community.Exception.CustomizeException;
 import life.john.community.dto.QuestionDTO;
+import life.john.community.mapper.QuestionExtMapper;
 import life.john.community.mapper.UserMapper;
 import life.john.community.model.QuestionExample;
 import life.john.community.model.User;
@@ -23,6 +24,8 @@ public class QuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     public PaginationDTO list(Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
@@ -126,5 +129,12 @@ public class QuestionService {
                 throw new CustomizeException(CustomizeErrorCode.Question_Not_Found);
             }
         }
+    }
+
+    public void incView(Integer id) {
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }
