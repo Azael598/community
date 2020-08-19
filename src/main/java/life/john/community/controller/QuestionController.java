@@ -1,8 +1,8 @@
 package life.john.community.controller;
 
-import life.john.community.dto.CommentCreateDTO;
 import life.john.community.dto.CommentDTO;
 import life.john.community.dto.QuestionDTO;
+import life.john.community.enums.CommentTypeEnum;
 import life.john.community.service.CommentService;
 import life.john.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class QuestionController {
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name = "id") Long id, Model model){
         QuestionDTO questionDTO = questionService.getById(id);
-        List<CommentDTO> comments = commentService.listByQuestionId(id);
+        List<CommentDTO> comments = commentService.listByQuestionId(id, CommentTypeEnum.QUESTION);
         questionService.incView(id);
         model.addAttribute("question",questionDTO);
         model.addAttribute("comments",comments);

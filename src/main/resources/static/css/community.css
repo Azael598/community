@@ -31,7 +31,7 @@ body {
     margin-top: 15px;
 }
 
-.question-title{
+.question-title {
     margin-top: 25px;
 }
 
@@ -65,6 +65,17 @@ body {
     border-bottom: 1px solid #eee;
 }
 
+.sub-comments {
+    padding-bottom: 5px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.sub-comments .btn {
+    margin: 10px 0;
+}
+
 .menu {
     color: #999;
     margin-top: 5px;
@@ -74,6 +85,19 @@ body {
     margin-right: 6px;
     font-size: 15px;
     cursor: pointer;
+}
+
+.menu .comment-icon {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .comment-icon:hover{
+    color: #499ef3;
+}
+
+.menu .active {
+    color: #499ef3;
 }
 
 .menu .icon:hover {
