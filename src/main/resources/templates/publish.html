@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>社区</title>
@@ -7,45 +7,68 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/community.css">
 
-    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+
+    <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body>
 <div th:insert="~{navigation :: nav}"></div>
 <div class="container-fluid main">
     <div class="row">
-        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" >
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
             <hr>
             <form action="/publish" method="post">
                 <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title">问题标题（简单扼要）</label>
-                    <input type="text" class="form-control" th:value="${title}" id="title" name="title" placeholder="问题标题">
+                    <input type="text" class="form-control" th:value="${title}" id="title" name="title"
+                           placeholder="问题标题">
                 </div>
                 <div class="form-group">
                     <label for="description">问题补充（必填，参照右侧提示）</label>
-                    <textarea class="form-control" id="description" th:text="${description}" name="description" cols="30" rows="10"></textarea>
+                    <textarea class="form-control" id="description" th:text="${description}" name="description"
+                              cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="tag">添加标签</label>
-                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag" placeholder="输入标签，以，分隔">
+                    <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"
+                           autocomplete="off"
+                           placeholder="输入标签，以，分隔"
+                           onclick="showSelectTag()">
+                    <div id="select-tag" class="publish-tag-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" th:each="selectCategory: ${tags}">
+                                <a th:href="${'#'+selectCategory.categoryName}" aria-controls="home" role="tab"
+                                   data-toggle="tab" th:text="${selectCategory.categoryName}"></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane" th:id="${selectCategory.categoryName}"
+                                 th:each="selectCategory: ${tags}">
+                                <span class="label label-info" th:each="selectTag: ${selectCategory.tags}">
+                                    <span class="glyphicon glyphicon-tags" onclick="selectTag(this)" th:data-tag="${selectTag}" th:text="${selectTag}"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="container-fluid main">
                     <div class="row">
-                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" >
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                             <div class="alert alert-danger col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                                th:text="${error}" th:if="${error != null}">
+                                 th:text="${error}" th:if="${error != null}">
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" >
-                        <button type="submit" class="btn btn-success btn-publish">发布</button>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="btn btn-success btn-publish">发布</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" >
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h3>问题发布指南</h3>
             - 问题标题：用精简语言描述，不超过25个字 <br>
             - 问题补充：详细补充您的问题内容，并确保问题描述清晰，提供相关资料 <br>
